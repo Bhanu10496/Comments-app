@@ -1,0 +1,80 @@
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+  <title>comment-app</title>
+</head>
+
+<body style="background-color: #FEFDC0">
+</body>
+
+<!-- Template for login page -->
+<template name="login">
+  <nav class="navbar navbar-default">
+    <div class="navbar navbar-header">
+      <a class="navbar navbar-brand" href="#" style="margin-left: 100px">CommentsApp</a>
+    </div>
+  <div style="margin-right: 150px">{{>loginButtons}}</div>
+  {{checkLogin}}
+</nav>
+<br>
+<div class="align">
+<div style="font-size: 100px;">Comments app</div>
+<div style="font-size: 20px;">Please login to manage comments</div>
+</div>
+</template>
+
+<!-- Template for homePage where all the comments are displayed -->
+<template name="homePage">
+  <nav class="navbar navbar-default">
+  <div class="navbar navbar-header" >
+      <a class="navbar navbar-brand" href="#" style="margin-left: 100px">CommentsApp</a>
+  </div>
+  <div style="margin-right: 150px">{{>loginButtons}}</div>
+  </nav>
+  <br>
+  {{checkLogin}}
+  <div class="container">
+   <header class="align">
+    <h1 style="font-weight: bolder;">Welcome to Comments app!</h1>
+    <br>
+    <form class="new-comment">
+      <input type="text" name="newComment" placeholder="Add a comment" size="80px">
+      <input type="submit" value="Add Comment" class="btn btn-success">
+    </form>
+   </header>
+   <br>
+    <ul>
+     {{#each comments}}
+      {{> comment}}
+     {{/each}}
+   </ul>
+  </div>
+</template>
+
+<!-- Template for individual comments -->
+<template name="comment">
+ <li class="alert alert-primary">
+ <button class="margin delete btn btn-danger {{checkUser}}">Remove</button>
+ <button class="margin edit btn btn-primary {{checkUser}}">Edit</button>
+ {{title}}
+ <br>
+ <div class="email-id">By: {{email}}</div>
+
+{{#if showModals}}
+<div id="myModal" class="modal" style="display: block;">
+
+
+  <form class="save align modal-content">
+    <h3>Edit the comment</h3>
+    <input type="text" class="margin" name="editedText" value="{{this.title}}">
+    <div>
+     <input type="submit" class=" btn btn-primary" value="Save">
+     <input type="button" class="cancel btn btn-danger" value="Cancel">
+    </div>
+  </form>
+</div>
+{{/if}}
+
+ </li>
+</template>
